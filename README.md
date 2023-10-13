@@ -7,5 +7,8 @@
 
   ------------------------
 
+~~This was mistaken text~~
+This is  <sub>first time</sub> uploading something in git, using git hub
+_it is little bit difficult_ <sub> i am so sad</sub> 
 
-
+see you again
