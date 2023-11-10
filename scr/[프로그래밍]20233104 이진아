@@ -1,0 +1,80 @@
+##3-3
+#!/bin/bash
+
+# 사용자로부터 몸무게와 키 입력 받기
+read -p "몸무게(kg): " weight
+read -p "키(m): " height
+
+# BMI 계산
+bmi=$(echo "scale=2; $weight / ($height * $height)" | bc)
+
+echo "BMI: $bmi"
+
+# BMI 범위에 따른 안내 메시지 표시
+if (( $(echo "$bmi >= 18.5" | bc -l) )) && (( $(echo "$bmi <= 23" | bc -l) )); then
+    echo "정상체중입니다."
+elif (( $(echo "$bmi < 18.5" | bc -l) )); then
+    echo "저체중입니다."
+else
+    echo "과체중입니다."
+fi
+
+
+##3-4
+#! /bin/sh
+
+echo "리눅스가 재밌나요? (yes/no)"
+read mind
+case $mind in
+	Y | YES | yes |y)
+	echo "yes";;
+	[nN]*)
+	echo "no";;
+	*)
+	echo "yes or no로 입력해주세요.";;
+	
+esac
+	
+exit 0
+
+
+##3-5
+#!/bin/bash
+
+# 내부 함수: 프로그램 시작
+start_program() {
+    echo "프로그램을 시작합니다..."
+    echo "함수 안으로 들어왔음"
+    
+    if [ "$1" == "-l" ]; then
+        echo "리스트에 대한 상세 정보 출력 중..."
+        ls -asl
+        echo "프로그램을 종료합니다."
+    else
+        echo "전체 파일 리스트 출력 중..."
+        ls -a
+        echo "프로그램을 종료합니다."
+    fi
+}
+
+# 스크립트 시작
+
+# 사용법 출력 함수
+print_usage() {
+    echo "사용법: $0 [-l]"
+    echo "  -l : 상세한 정보로 파일 리스트 출력"
+}
+
+# 옵션 처리
+if [ "$#" -eq 0 ]; then
+    start_program
+elif [ "$#" -eq 1 ] && [ "$1" == "-l" ]; then
+    start_program -l
+else
+    echo "잘못된 옵션 또는 인자입니다."
+    print_usage
+    exit 1
+fi
+
+# 종료
+exit 0
