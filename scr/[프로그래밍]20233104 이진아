@@ -20,6 +20,7 @@ else
 fi
 
 
+
 ##3-4
 #! /bin/sh
 
@@ -77,4 +78,69 @@ else
 fi
 
 # 종료
+exit 0
+
+##3-6
+#!/bin/bash
+
+# 사용법 출력 함수
+print_usage() {
+    echo "사용법: $0 <폴더 이름>"
+}
+
+# 입력된 폴더 이름 확인
+if [ "$#" -ne 1 ]; then
+    echo "폴더 이름을 입력하세요."
+    print_usage
+    exit 1
+fi
+
+folder_name=$1
+
+# 폴더 존재 여부 확인 및 생성
+if [ -d "$folder_name" ]; then
+    echo "폴더 '$folder_name'이 이미 존재합니다."
+else
+    echo "폴더 '$folder_name'을 생성합니다."
+    mkdir "$folder_name"
+fi
+
+# 5개의 파일 생성
+for i in {1..5}; do
+    touch "$folder_name/file$i.txt"
+    echo "내용 $i" > "$folder_name/file$i.txt"
+done
+
+# 폴더 압축
+echo "폴더를 압축합니다..."
+tar -czf "$folder_name.tar.gz" "$folder_name"
+
+# 새로운 폴더 생성하여 압축 해제
+new_folder="extracted_$folder_name"
+echo "새로운 폴더 '$new_folder'을 생성하고 압축을 해제합니다..."
+mkdir "$new_folder"
+tar -xzf "$folder_name.tar.gz" -C "$new_folder"
+
+echo "프로그램을 종료합니다."
+
+##3-3
+
+#! /bin/sh
+
+read a
+read b
+
+cal=`expr $a / \( $b\*$b )`
+s=18.5
+e=23
+if [ $cal -ge $s && $cal -lt $e ]
+then
+	echo "정상 체중입니다."
+elif [ $cal -lt $s ]
+then 
+	echo "저체중입니다."
+else
+	echo "과체중입니다."
+fi
+
 exit 0
