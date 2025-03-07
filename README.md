@@ -1,4 +1,4 @@
-# Oh-so-gi :flamingo:
+# AI Structured Study Space :flamingo:
 
 *  operating **open_source project** :computer:
 *  it is part of university class assignment
